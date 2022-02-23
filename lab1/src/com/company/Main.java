@@ -10,9 +10,6 @@ import static com.out.csv.Constants.OUTPUT_FILE;
 
 public class Main {
 
-    public Main() {
-        super();
-    }
 
     public static void main(String[] args) throws IOException {
         ReaderInputFile file = null;
