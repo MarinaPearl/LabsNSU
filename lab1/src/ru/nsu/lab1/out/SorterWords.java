@@ -26,7 +26,7 @@ public class SorterWords {
             }
         }
     }
-    public void MapToList () {
+    public void mapToList () {
         this.list = new ArrayList<Pair<String, Integer>>();
         for (Map.Entry<String, Integer> e : myMap.entrySet()) {
             list.add(new Pair(e.getKey(), e.getValue()));

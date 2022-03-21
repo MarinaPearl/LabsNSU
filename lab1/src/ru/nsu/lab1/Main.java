@@ -21,7 +21,7 @@ public class Main {
             file.fileToString();
             SorterWords sort = new SorterWords(file.getStr());
             sort.symbolToMap();
-            sort.MapToList();
+            sort.mapToList();
             sort.sorterList();
             writer.writeToFile(sort.getList(), file.reternCountWords());
 
