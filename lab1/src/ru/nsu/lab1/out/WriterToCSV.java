@@ -1,16 +1,13 @@
-package com.out.csv;
+package ru.nsu.lab1.out;
 
 import javafx.util.Pair;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.List;
 
-import static com.out.csv.Constants.MAX_PERCENT;
+import static ru.nsu.lab1.out.Constants.*;
 
-public class WriterToCSV {
+public class WriterToCSV implements Closeable {
     private PrintWriter writer;
     private char delimiter = ';';
 
@@ -20,14 +17,19 @@ public class WriterToCSV {
     }
     public void writeToFile(List<Pair<String, Integer>> list, int count)
     {
-        for (int i = 0; i < list.size(); ++i)
+        for (int i = START; i < list.size(); ++i) {
             writer.write(list.get(i).getKey() + delimiter +  list.get(i).getValue() +delimiter+
-                    (double)(list.get(i).getValue() * MAX_PERCENT / count)  + "\n");{
+                    (double)(list.get(i).getValue() * MAX_PERCENT / count)  + LINE_TRUNSLATION);
 
         }
     }
     public void closeOut() throws IOException
     {
+        writer.close();
+    }
+
+    @Override
+    public void close() throws IOException {
         writer.close();
     }
 }

@@ -1,4 +1,4 @@
-package com.out.csv;
+package ru.nsu.lab1.out;
 
 import javafx.util.Pair;
 

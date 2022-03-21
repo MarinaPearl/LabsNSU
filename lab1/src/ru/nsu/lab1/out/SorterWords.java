@@ -1,4 +1,4 @@
-package com.out.csv;
+package ru.nsu.lab1.out;
 
 import javafx.util.Pair;
 
@@ -8,8 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.out.csv.Constants.COUNTER_VALUE;
-import static com.out.csv.Constants.KEY_INITIALIZATION;
+import static ru.nsu.lab1.out.Constants.*;
 
 public class SorterWords {
     private Map<String, Integer> myMap;
@@ -22,7 +21,7 @@ public class SorterWords {
     public void symbolToMap() {
         this.myMap = new HashMap();
         for (String string : this.str) {
-            if (string.hashCode() != 0) {
+            if (string.hashCode() != EXAMINATION) {
                 this.myMap.put(string, myMap.getOrDefault(string, KEY_INITIALIZATION) + COUNTER_VALUE);
             }
         }
