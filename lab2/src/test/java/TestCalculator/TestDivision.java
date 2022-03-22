@@ -33,7 +33,7 @@ public class TestDivision {
             OperationsInCalculator operation = creator.creatOperation();
             operation.doOperation(context, null);
         } catch (RuntimeException error) {
-            error.getMessage();
+            System.out.println(error.getMessage());
         }
     }
 }

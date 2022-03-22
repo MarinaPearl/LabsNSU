@@ -1,4 +1,5 @@
 package ru.nsu.Demchuk.lab2.Calculator;
+import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.Stack;
 
@@ -23,7 +24,11 @@ public class Context {
         stackNumbers.push(new Double(value));
     }
     public void popInStack() {
-        stackNumbers.pop();
+        try {
+            stackNumbers.pop();
+        } catch (EmptyStackException error) {
+            System.out.println("array out of bounds");
+        }
     }
     public void setMap(String str, Double value) {
         initializationArguments.put(str, value);
