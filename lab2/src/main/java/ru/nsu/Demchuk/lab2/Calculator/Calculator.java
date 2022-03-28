@@ -1,6 +1,7 @@
 package ru.nsu.Demchuk.lab2.Calculator;
 
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+import ru.nsu.Demchuk.lab2.Main;
 import ru.nsu.Demchuk.lab2.factory.FactoryCalculator;
 
 import java.io.FileInputStream;
@@ -9,13 +10,17 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Vector;
+import java.util.logging.Logger;
 
 public class Calculator {
     private InputStream input;
     private Properties prop;
     private ArrayList<String[]> str;
+    private String pathToProperty = "/file.properties";
+    private static Logger log = Logger.getLogger(Calculator.class.getName());
+    private String errorLog = "errors in calculator! check parametrs";
     public Calculator (ArrayList<String[]> str) throws IOException {
-        input = Class.class.getResourceAsStream("/file.properties");
+        input = Class.class.getResourceAsStream(pathToProperty);
         this.str = str;
     }
     public void doOperations() throws IOException{
@@ -34,7 +39,8 @@ public class Calculator {
                 operation.doOperation(calculatorState, arguments);
             }
         } catch (ClassNotFoundException |InstantiationException | IllegalAccessException error) {
-            System.out.println(error.getMessage());
+            log.info(errorLog);
+            //System.out.println(error.getMessage());
         }
 
     }

@@ -1,11 +1,16 @@
 package ru.nsu.Demchuk.lab2.Calculator;
+import ru.nsu.Demchuk.lab2.Main;
+
 import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.Stack;
+import java.util.logging.Logger;
 
 public class Context {
+    private static Logger log = Logger.getLogger(Context.class.getName());
     private HashMap<String, Double> initializationArguments;
     private Stack<Double> stackNumbers;
+    private String errorLog = "array out of bounds";
     public Context() {
         initializationArguments = new HashMap<String, Double>();
         stackNumbers = new Stack<Double>();
@@ -27,7 +32,8 @@ public class Context {
         try {
             stackNumbers.pop();
         } catch (EmptyStackException error) {
-            System.out.println("array out of bounds");
+            log.info(errorLog);
+            //System.out.println("array out of bounds");
         }
     }
     public void setMap(String str, Double value) {
