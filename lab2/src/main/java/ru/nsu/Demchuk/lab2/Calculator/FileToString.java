@@ -5,11 +5,9 @@ import ru.nsu.Demchuk.lab2.factory.*;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 public class FileToString implements Closeable{
-    private static Logger log = Logger.getLogger(FileToString.class.getName());
     private BufferedReader input;
     private ArrayList<String[]> commandsInCalculator;
     private final String separator = "\\s";
@@ -20,8 +18,6 @@ public class FileToString implements Closeable{
         input = new BufferedReader(new InputStreamReader(System.in));
     }
     public void readFileInToStack() throws IOException {
-
-        log.info("doing FiletoString");
         commandsInCalculator = new ArrayList<String[]>();
         Pattern pattern = Pattern.compile(separator);
         String str = null;

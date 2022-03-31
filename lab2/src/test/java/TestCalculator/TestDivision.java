@@ -7,7 +7,11 @@ import ru.nsu.Demchuk.lab2.Calculator.OperationsInCalculator;
 import ru.nsu.Demchuk.lab2.factory.FactoryCalculator;
 import ru.nsu.Demchuk.lab2.factory.FactoryDivision;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class TestDivision {
+    private static Logger log = Logger.getLogger(TestDivision.class.getName());
     @Test
     public void testDevision() {
         try {
@@ -19,8 +23,8 @@ public class TestDivision {
             operation.doOperation(context, null);
             Double value = new Double(4.0);
             Assert.assertEquals(value, context.getStack().peek());
-        } catch (RuntimeException error) {
-            error.getMessage();
+        } catch (Exception error) {
+            log.log(Level.SEVERE, "Exception : ", error.getMessage());
         }
     }
     @Test
@@ -32,8 +36,8 @@ public class TestDivision {
             FactoryCalculator creator = new FactoryDivision();
             OperationsInCalculator operation = creator.creatOperation();
             operation.doOperation(context, null);
-        } catch (RuntimeException error) {
-            System.out.println(error.getMessage());
+        } catch (Exception error) {
+            log.log(Level.SEVERE, "Exception : ", error);
         }
     }
 }

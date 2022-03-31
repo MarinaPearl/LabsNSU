@@ -9,8 +9,11 @@ import ru.nsu.Demchuk.lab2.factory.FactoryDefine;
 
 import java.util.HashMap;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TestDefine {
+    private static Logger log = Logger.getLogger(TestDefine.class.getName());
     @Test
     public void testDefine() {
         try {
@@ -37,8 +40,8 @@ public class TestDefine {
             arguments.add("6.0");
             operation.doOperation(context, arguments);
             Assert.assertEquals(testMap, context.getMap());
-        } catch (RuntimeException error) {
-            System.out.println(error.getMessage());
+        } catch (Exception error) {
+            log.log(Level.SEVERE, "Exception : ", error.getMessage());
         }
     }
     @Test
@@ -51,8 +54,8 @@ public class TestDefine {
             arguments.add("DEFINE");
             arguments.add("4.0");
             opearion.doOperation(context, arguments);
-        } catch (RuntimeException error) {
-            System.out.println(error.getMessage());
+        } catch (Exception error) {
+            log.log(Level.SEVERE, "Exception : ", error);
         }
     }
 }
