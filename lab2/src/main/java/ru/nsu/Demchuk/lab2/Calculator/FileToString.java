@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-public class FileToString implements Closeable{
+public class FileToString {
     private BufferedReader input;
     private ArrayList<String[]> commandsInCalculator;
     private final String separator = "\\s";
@@ -25,12 +25,9 @@ public class FileToString implements Closeable{
             String[] str1 = pattern.split(str);
             commandsInCalculator.add(str1);
         }
+       input.close();
     }
     public ArrayList<String[]> getCommmands() {
         return commandsInCalculator;
-    }
-    @Override
-    public void close() throws IOException {
-        input.close();
     }
 }

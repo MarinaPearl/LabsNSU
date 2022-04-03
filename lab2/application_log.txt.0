@@ -1,7 +1,12 @@
-мар 31, 2022 8:27:28 PM ru.nsu.Demchuk.lab2.Calculator.Calculator doOperations
-SEVERE: Exception : 
-ru.nsu.Demchuk.lab2.Calculator.ExceptionStack: not enough items on the stack
-	at ru.nsu.Demchuk.lab2.Calculator.SquareNumberInCalculator.doOperation(SquareNumberInCalculator.java:20)
-	at ru.nsu.Demchuk.lab2.Calculator.Calculator.doOperations(Calculator.java:42)
-	at ru.nsu.Demchuk.lab2.Main.main(Main.java:31)
-
+апр 04, 2022 12:08:14 AM ru.nsu.Demchuk.lab2.Calculator.Define doOperation
+INFO: Start Define
+апр 04, 2022 12:08:15 AM ru.nsu.Demchuk.lab2.Calculator.PushInCalculator doOperation
+INFO: Start Push
+апр 04, 2022 12:08:15 AM ru.nsu.Demchuk.lab2.Calculator.SquareNumberInCalculator doOperation
+INFO: Start SQRT
+апр 04, 2022 12:08:15 AM ru.nsu.Demchuk.lab2.Calculator.Define doOperation
+INFO: Start Define
+апр 04, 2022 12:08:15 AM ru.nsu.Demchuk.lab2.Calculator.PushInCalculator doOperation
+INFO: Start Push
+апр 04, 2022 12:08:15 AM ru.nsu.Demchuk.lab2.Calculator.PrintArgumentInStack doOperation
+INFO: Start Print
