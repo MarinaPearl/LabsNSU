@@ -1,6 +1,14 @@
 .idea/
 *.iml
 *.iws
+<<<<<<< HEAD
 *.txt
 *.csv
 *.class
+=======
+*.class
+*.jar
+*.txt
+*.csv
+
+>>>>>>> master
