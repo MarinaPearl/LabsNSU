@@ -45,6 +45,7 @@ public class Tetris{
         }
 
         Line line = new Line(XMAX, 0, XMAX, YMAX);
+        line.setFill(Color.BLACK);
         Text scoretext = new Text("Score: ");
         scoretext.setStyle("-fx-font: 20 arial;");
         scoretext.setY(50);
@@ -53,7 +54,8 @@ public class Tetris{
         level.setStyle("-fx-font: 20 arial;");
         level.setY(100);
         level.setX(XMAX + 5);
-        level.setFill(Color.GREEN);
+        level.setFill(Color.PINK);
+        scoretext.setFill(Color.PINK);
         group.getChildren().addAll(scoretext, line, level);
 
         Form a = nextObj;
@@ -64,7 +66,6 @@ public class Tetris{
         stage.setScene(scene);
         stage.setTitle("T E T R I S");
         stage.show();
-
         Timer fall = new Timer();
         TimerTask task = new TimerTask() {
             public void run() {
