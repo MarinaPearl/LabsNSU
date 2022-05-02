@@ -32,7 +32,7 @@ public class GenerationFigure {
                 color = Color.BISQUE;
                 break;
             case "t":
-                color = Color.GOLD;
+                color = Color.DEEPSKYBLUE;
                 break;
             case "z":
                 color = Color.CORAL;

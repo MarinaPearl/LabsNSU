@@ -19,7 +19,7 @@ import javafx.util.Duration;
 
 import static ru.nsu.Demchuk.lab3.Constants.PATH_TO_IMAGE_MENU;
 
-public class Main extends Application {
+public class Main extends Application{
     @Override
     public void start(Stage primaryStage) {
         Pane root = new Pane();
@@ -40,8 +40,9 @@ public class Main extends Application {
         SubMenu optionsMenu = new SubMenu(back
         );
         MenuBox menuBox = new MenuBox(mainMenu);
-
-        newGame.setOnMouseClicked(event-> {
+        MenuItem backInMain = new MenuItem("BACK IN MENU");
+        SubMenu tetrisMenu = new SubMenu(backInMain);
+        newGame.setOnMouseClicked(event->{
             Tetris game = new Tetris(primaryStage);
             try {
                 game.start();
