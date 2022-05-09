@@ -1,8 +1,12 @@
-package ru.nsu.Demchuk.lab3;
-import javafx.animation.*;
+package ru.nsu.Demchuk.lab3.View;
+
+import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
+import javafx.animation.FillTransition;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -16,47 +20,53 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import ru.nsu.Demchuk.lab3.Controller.MenuController;
+import ru.nsu.Demchuk.lab3.Controller.RegistrartionController;
 
-import static ru.nsu.Demchuk.lab3.Constants.PATH_TO_IMAGE_MENU;
+import static ru.nsu.Demchuk.lab3.View.Constants.*;
 
-public class Main extends Application{
+public class Main extends Application {
+    private  Pane root;
+    private Image image;
+    private ImageView img;
+   public static void main(String[] args) {
+       launch(args);
+    }
+    public Main() {
+       root = new Pane();
+       try {
+           image = new Image(PATH_IN_TO_IMAGE_MENU);
+           if (image == null)
+               throw new Exception("menu image do not open");
+       }catch (Exception error) {
+           System.out.println(error.getMessage());
+           System.exit(0);
+       }
+
+     }
     @Override
-    public void start(Stage primaryStage) {
-        Pane root = new Pane();
-        Image image = new Image(PATH_TO_IMAGE_MENU);
-        ImageView img = new ImageView(image);
-        img.setFitHeight(600);
-        img.setFitWidth(900);
-        root.getChildren().add(img);
-
+    public void start(Stage stage) throws Exception {
+       img = new ImageView(image);
+       img.setFitWidth(FIELD_WIDTH);
+       img.setFitHeight(FIELD_HEIGHT);
+       root.getChildren().add(img);
+       Scene scene = new Scene(root, FIELD_WIDTH, FIELD_HEIGHT);
         MenuItem newGame = new MenuItem("PLAY");
         MenuItem statistic = new MenuItem("STATISTIC");
         MenuItem exitGame = new MenuItem("EXIT");
         SubMenu mainMenu = new SubMenu(
                 newGame,statistic,exitGame
         );
-
-        MenuItem back = new MenuItem("BACK");
-        SubMenu optionsMenu = new SubMenu(back
-        );
         MenuBox menuBox = new MenuBox(mainMenu);
-        MenuItem backInMain = new MenuItem("BACK IN MENU");
-        SubMenu tetrisMenu = new SubMenu(backInMain);
-        newGame.setOnMouseClicked(event->{
-            Tetris game = new Tetris(primaryStage);
-            try {
-                game.start();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        newGame.setOnMouseClicked(event -> {
+            MenuController.play(stage);
         });
-        statistic.setOnMouseClicked(event->menuBox.setSubMenu(optionsMenu));
-        exitGame.setOnMouseClicked(event-> System.exit(0));
-        back.setOnMouseClicked(event ->menuBox.setSubMenu(mainMenu));
-
-        root.getChildren().addAll(menuBox);
-
-        Scene scene = new Scene(root,900,600);
+        exitGame.setOnMouseClicked(event -> {
+            MenuController.exit();
+        });
+        statistic.setOnMouseClicked(event -> {
+            MenuController.showStatistic(stage);
+        });
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 FadeTransition ft = new FadeTransition(Duration.seconds(1),menuBox);
@@ -75,18 +85,19 @@ public class Main extends Application{
                 }
             }
         });
-        primaryStage.setTitle("Pause");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-    public static class MenuItem extends StackPane{
+        root.getChildren().addAll(menuBox);
+       stage.setScene(scene);
+       stage.setTitle("TETRIS");
+       stage.show();
+   }
+    private  class MenuItem extends StackPane {
         public  MenuItem(String name){
-            Rectangle bg = new Rectangle(200,20,Color.WHITE);
+            Rectangle bg = new Rectangle(200,40, Color.WHITE);
             bg.setOpacity(0.5);
 
             Text text = new Text(name);
             text.setFill(Color.WHITE);
-            text.setFont(Font.font("Arial",FontWeight.BOLD,14));
+            text.setFont(Font.font("Arial", FontWeight.BOLD,14));
 
             setAlignment(Pos.CENTER);
             getChildren().addAll(bg,text);
@@ -104,13 +115,13 @@ public class Main extends Application{
             });
         }
     }
-    private static class MenuBox extends Pane{
+    private class MenuBox extends Pane{
         static SubMenu subMenu;
         public MenuBox(SubMenu subMenu){
             MenuBox.subMenu = subMenu;
 
             setVisible(false);
-            Rectangle bg = new Rectangle(900,600,Color.LIGHTBLUE);
+            Rectangle bg = new Rectangle(FIELD_WIDTH,FIELD_HEIGHT,Color.LIGHTBLUE);
             bg.setOpacity(0.4);
             getChildren().addAll(bg, subMenu);
         }
@@ -121,14 +132,15 @@ public class Main extends Application{
         }
     }
 
-    private static class SubMenu extends VBox{
+    private class SubMenu extends VBox {
         public SubMenu(MenuItem...items){
             setSpacing(15);
-            setTranslateY(250);
-            setTranslateX(350);
+            setTranslateY(200);
+            setTranslateX(195);
             for(MenuItem item : items){
                 getChildren().addAll(item);
             }
         }
     }
+
 }
