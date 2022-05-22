@@ -32,6 +32,7 @@ public class StatisticView {
     Image image;
     int count = 0;
     private Button back;
+    private Text textStatistic;
     private static final String BUTTON_NAME_BACK = "BACK";
     private static final String MENU_NAME = "S T A T I S T I C";
     private static final String FONT = "Arial";
@@ -46,37 +47,28 @@ public class StatisticView {
     private static final int TEXT_Y_2 = 200;
     private static final int TEXT_Y = 120;
     private static final int BACK_X = 196;
-    private static final int BACK_Y = 196;
+    private static final int BACK_Y = 500;
     private static final int OFFSET = 50;
     private static final int COUNT_PEOUPLE = 6;
+    private static final int NUUL_SET = 0;
     public StatisticView(Stage stage) {
            image = new Image(PATH_IN_TO_IMAGE_MENU);
            pane = new Pane();
            this.stage = stage;
-           back = new Button(BUTTON_NAME_BACK);
 
     }
     public  void doStatistic(HashMap<String, Integer> unsortedMap){
-       count = 0;
+        count = NUUL_SET;
         ImageView img;
         img = new ImageView(image);
         img.setFitWidth(FIELD_WIDTH);
         img.setFitHeight(FIELD_HEIGHT);
         pane.getChildren().add(img);
         Scene scene = new Scene(pane, FIELD_WIDTH, FIELD_HEIGHT);
-        Text textStatistic = new Text(MENU_NAME);
-        textStatistic.setX(TEXT_X);
-        textStatistic.setY(TEXT_Y);
-        textStatistic.setFill(Color.WHITE);
-        textStatistic.setFont(Font.font(FONT, FontWeight.BOLD,FONT_SIZE));
-        back.setTranslateX(BACK_X);
-        back.setTranslateY(BACK_Y);
-        back.setPrefSize(BUTTON_W, BUTTON_H);
-        back.setTextFill(Color.WHITE);
-        back.setStyle(BUTTON_STYLE);
-        back.setOpacity(BUTTON_OPACITY);
+        setButton();
+        setText();
         pane.getChildren().addAll(back, textStatistic);
-        int offset = 0;
+        int offset = NUUL_SET;
         back.setOnMouseClicked(event -> {
             StatisticController.back(stage);
         });
@@ -88,7 +80,6 @@ public class StatisticView {
                     text.setFont(Font.font(FONT, FontWeight.BOLD, FONT_SIZE_2));
                     text.setX(TEXT_X_2);
                     text.setY(TEXT_Y_2 + offset);
-                    //pane.setAlignment(Pos.CENTER);
                     pane.getChildren().addAll(text);
                 }
             }
@@ -97,6 +88,21 @@ public class StatisticView {
         }
         stage.setScene(scene);
         stage.show();
-
+    }
+    private void setButton() {
+        back = new Button(BUTTON_NAME_BACK);
+        back.setTranslateX(BACK_X);
+        back.setTranslateY(BACK_Y);
+        back.setPrefSize(BUTTON_W, BUTTON_H);
+        back.setTextFill(Color.WHITE);
+        back.setStyle(BUTTON_STYLE);
+        back.setOpacity(BUTTON_OPACITY);
+    }
+    private void setText() {
+        textStatistic = new Text(MENU_NAME);
+        textStatistic.setX(TEXT_X);
+        textStatistic.setY(TEXT_Y);
+        textStatistic.setFill(Color.WHITE);
+        textStatistic.setFont(Font.font(FONT, FontWeight.BOLD,FONT_SIZE));
     }
 }

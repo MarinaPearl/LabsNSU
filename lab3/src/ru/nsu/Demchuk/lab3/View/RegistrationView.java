@@ -28,6 +28,8 @@ public class RegistrationView {
     private Button goToGame;
     private Button back;
     private static String name;
+    private Text text;
+    private TextField textField;
     private static final int TEXT_X = 135;
     private static final int TEXT_Y = 200;
     private static final int FONT_SIZE = 33;
@@ -51,8 +53,6 @@ public class RegistrationView {
         pane = new Pane();
         image = new Image(PATH_IN_TO_IMAGE_MENU);
         this.stage = stage;
-        goToGame = new Button(NAME_BUTTON_GAME);
-        back = new Button(NAME_BUTTON_BACK);
     }
 
     public void makeRegistration() {
@@ -62,28 +62,10 @@ public class RegistrationView {
         img.setFitHeight(FIELD_HEIGHT);
         pane.getChildren().add(img);
         Scene scene = new Scene(pane, FIELD_WIDTH, FIELD_HEIGHT);
-        TextField textField = new TextField();
-        Text text = new Text(NAME_MENU);
-        text.setX(TEXT_X);
-        text.setY(TEXT_Y);
-        text.setFill(Color.WHITE);
-        text.setFont(Font.font(FONT, FontWeight.BOLD,FONT_SIZE));
-        textField.setPrefColumnCount(TEXT_FIELD_SIZE);
-        textField.setLayoutX(TEXT_FIELD_X);
-        textField.setLayoutY(TEXT_FIELD_Y);
-        textField.setPrefHeight(TEXT_FIELD_HEIGHT);
-        goToGame.setTranslateX(BUTTON_X);
-        goToGame.setTranslateY(GAME_Y);
-        goToGame.setPrefSize(BUTTON_W, BUTTON_H);
-        goToGame.setTextFill(Color.WHITE);
-        goToGame.setStyle(BUTTON_STYLE);
-        back.setTranslateX(BUTTON_X);
-        back.setTranslateY(BACK_Y);
-        back.setPrefSize(BUTTON_W, BUTTON_H);
-        back.setTextFill(Color.WHITE);
-        back.setStyle(BUTTON_STYLE);
-        back.setOpacity(BUTTON_OPACITY);
-        goToGame.setOpacity(BUTTON_OPACITY);
+        setButtonGame();
+        setButtonBack();
+        setText();
+        setTextField();
         pane.getChildren().addAll(textField, text, goToGame, back);
         RegistrartionController controller = new RegistrartionController();
         goToGame.setOnAction(new EventHandler<ActionEvent>() {
@@ -105,5 +87,41 @@ public class RegistrationView {
     }
     public static String getName() {
         return name;
+    }
+    private void setButtonGame()
+    {
+        goToGame = new Button(NAME_BUTTON_GAME);
+        goToGame.setTranslateX(BUTTON_X);
+        goToGame.setTranslateY(GAME_Y);
+        goToGame.setPrefSize(BUTTON_W, BUTTON_H);
+        goToGame.setTextFill(Color.WHITE);
+        goToGame.setStyle(BUTTON_STYLE);
+        goToGame.setOpacity(BUTTON_OPACITY);
+
+    }
+    private void setButtonBack() {
+        back = new Button(NAME_BUTTON_BACK);
+        back.setTranslateX(BUTTON_X);
+        back.setTranslateY(BACK_Y);
+        back.setPrefSize(BUTTON_W, BUTTON_H);
+        back.setTextFill(Color.WHITE);
+        back.setStyle(BUTTON_STYLE);
+        back.setOpacity(BUTTON_OPACITY);
+
+    }
+    private void setText() {
+        text = new Text(NAME_MENU);
+        text.setX(TEXT_X);
+        text.setY(TEXT_Y);
+        text.setFill(Color.WHITE);
+        text.setFont(Font.font(FONT, FontWeight.BOLD,FONT_SIZE));
+    }
+    private void setTextField() {
+        textField = new TextField();
+        textField.setPrefColumnCount(TEXT_FIELD_SIZE);
+        textField.setLayoutX(TEXT_FIELD_X);
+        textField.setLayoutY(TEXT_FIELD_Y);
+        textField.setPrefHeight(TEXT_FIELD_HEIGHT);
+
     }
 }

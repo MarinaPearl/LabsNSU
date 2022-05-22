@@ -9,73 +9,74 @@ import ru.nsu.Demchuk.lab3.View.GenerationFigure;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static ru.nsu.Demchuk.lab3.Model.ConstantsModel.*;
 import static ru.nsu.Demchuk.lab3.View.Constants.*;
 
 public class Model {
     public static int[][] MESH = new int[XMAX / SIZE][YMAX / SIZE];
     private static int linesNo = 0;
     public  static GenerationFigure makeRect() {
-        int block = (int) (Math.random() * 100);
+        int block = (int) (Math.random() * ALIGMENT);
         String name;
-        Rectangle a = new Rectangle(SIZE - 1, SIZE - 1),
-                b = new Rectangle(SIZE - 1, SIZE - 1),
-                c = new Rectangle(SIZE - 1, SIZE - 1),
-                d = new Rectangle(SIZE - 1, SIZE - 1);
-        if (block < 15) {
-            a.setX(XMAX / 2 - SIZE);
-            b.setX(XMAX / 2 - SIZE);
+        Rectangle a = new Rectangle(SIZE - OFFSET_LEFT, SIZE - OFFSET_LEFT),
+                b = new Rectangle(SIZE - OFFSET_LEFT, SIZE - OFFSET_LEFT),
+                c = new Rectangle(SIZE - OFFSET_LEFT, SIZE - OFFSET_LEFT),
+                d = new Rectangle(SIZE - OFFSET_LEFT, SIZE - OFFSET_LEFT);
+        if (block < FORM_ONE) {
+            a.setX(XMAX / HALF - SIZE);
+            b.setX(XMAX / HALF - SIZE);
             b.setY(SIZE);
-            c.setX(XMAX / 2);
+            c.setX(XMAX / HALF);
             c.setY(SIZE);
-            d.setX(XMAX / 2 + SIZE);
+            d.setX(XMAX / HALF + SIZE);
             d.setY(SIZE);
-            name = "j";
-        } else if (block < 30) {
-            a.setX(XMAX / 2 + SIZE);
-            b.setX(XMAX / 2 - SIZE);
+            name = SHAPE_ONE;
+        } else if (block < FORM_TWO) {
+            a.setX(XMAX / HALF + SIZE);
+            b.setX(XMAX / HALF - SIZE);
             b.setY(SIZE);
-            c.setX(XMAX / 2);
+            c.setX(XMAX / HALF);
             c.setY(SIZE);
-            d.setX(XMAX / 2 + SIZE);
+            d.setX(XMAX / HALF + SIZE);
             d.setY(SIZE);
-            name = "l";
-        } else if (block < 45) {
-            a.setX(XMAX / 2 - SIZE);
-            b.setX(XMAX / 2);
-            c.setX(XMAX / 2 - SIZE);
+            name = SHAPE_TWO;
+        } else if (block < FORM_THREE) {
+            a.setX(XMAX / HALF - SIZE);
+            b.setX(XMAX / HALF);
+            c.setX(XMAX / HALF - SIZE);
             c.setY(SIZE);
-            d.setX(XMAX / 2);
+            d.setX(XMAX / HALF);
             d.setY(SIZE);
-            name = "o";
-        } else if (block < 60) {
-            a.setX(XMAX / 2 + SIZE);
-            b.setX(XMAX / 2);
-            c.setX(XMAX / 2);
+            name = SHAPE_THREE;
+        } else if (block < FORM_FOUR) {
+            a.setX(XMAX / HALF + SIZE);
+            b.setX(XMAX / HALF);
+            c.setX(XMAX / HALF);
             c.setY(SIZE);
-            d.setX(XMAX / 2 - SIZE);
+            d.setX(XMAX / HALF - SIZE);
             d.setY(SIZE);
-            name = "s";
-        } else if (block < 75) {
-            a.setX(XMAX / 2 - SIZE);
-            b.setX(XMAX / 2);
-            c.setX(XMAX / 2);
+            name = SHAPE_FOUR;
+        } else if (block < FORM_FIVE) {
+            a.setX(XMAX / HALF - SIZE);
+            b.setX(XMAX / HALF);
+            c.setX(XMAX / HALF);
             c.setY(SIZE);
-            d.setX(XMAX / 2 + SIZE);
-            name = "t";
-        } else if (block < 90) {
-            a.setX(XMAX / 2 + SIZE);
-            b.setX(XMAX / 2);
-            c.setX(XMAX / 2 + SIZE);
+            d.setX(XMAX / HALF + SIZE);
+            name = SHAPE_FIVE;
+        } else if (block < FORM_SIX) {
+            a.setX(XMAX / HALF + SIZE);
+            b.setX(XMAX / HALF);
+            c.setX(XMAX / HALF + SIZE);
             c.setY(SIZE);
-            d.setX(XMAX / 2 + SIZE + SIZE);
+            d.setX(XMAX / HALF + SIZE + SIZE);
             d.setY(SIZE);
-            name = "z";
+            name = SHAPE_SIX;
         } else {
-            a.setX(XMAX / 2 - SIZE - SIZE);
-            b.setX(XMAX / 2 - SIZE);
-            c.setX(XMAX / 2);
-            d.setX(XMAX / 2 + SIZE);
-            name = "i";
+            a.setX(XMAX / HALF - SIZE - SIZE);
+            b.setX(XMAX / HALF - SIZE);
+            c.setX(XMAX / HALF);
+            d.setX(XMAX / HALF + SIZE);
+            name = SHAPE_SEVEN;
         }
         return new GenerationFigure(a, b, c, d, name);
     }
@@ -83,10 +84,10 @@ public class Model {
         try {
             if (form.square1.getX() + MOVE <= XMAX - SIZE && form.square2.getX() + MOVE <= XMAX - SIZE
                     && form.square3.getX() + MOVE <= XMAX - SIZE && form.square4.getX() + MOVE <= XMAX - SIZE) {
-                int movea = MESH[((int) form.square1.getX() / SIZE) + 1][((int) form.square1.getY() / SIZE)];
-                int moveb = MESH[((int) form.square2.getX() / SIZE) + 1][((int) form.square2.getY() / SIZE)];
-                int movec = MESH[((int) form.square3.getX() / SIZE) + 1][((int) form.square3.getY() / SIZE)];
-                int moved = MESH[((int) form.square4.getX() / SIZE) + 1][((int) form.square4.getY() / SIZE)];
+                int movea = MESH[((int) form.square1.getX() / SIZE) + OFFSET_RIGHT][((int) form.square1.getY() / SIZE)];
+                int moveb = MESH[((int) form.square2.getX() / SIZE) + OFFSET_RIGHT][((int) form.square2.getY() / SIZE)];
+                int movec = MESH[((int) form.square3.getX() / SIZE) + OFFSET_RIGHT][((int) form.square3.getY() / SIZE)];
+                int moved = MESH[((int) form.square4.getX() / SIZE) + OFFSET_RIGHT][((int) form.square4.getY() / SIZE)];
                 if (movea == 0 && movea == moveb && moveb == movec && movec == moved) {
                     form.square1.setX(form.square1.getX() + MOVE);
                     form.square2.setX(form.square2.getX() + MOVE);
@@ -98,13 +99,13 @@ public class Model {
     }
     public static void moveLeft(GenerationFigure form) {
         try {
-        if (form.square1.getX() - MOVE >= 0 && form.square2.getX() - MOVE >= 0 &&
-                form.square3.getX() - MOVE >= 0 && form.square4.getY() - MOVE >= 0) {
-            int maovea = MESH[((int)form.square1.getX()) / SIZE - 1][(int)form.square1.getY() / SIZE];
-            int maoveb = MESH[((int)form.square2.getX() / SIZE) - 1][(int)form.square1.getY() / SIZE];
-            int maovec = MESH[((int)form.square3.getX() / SIZE) - 1][(int)form.square1.getY() / SIZE];
-            int maoved = MESH[((int)form.square4.getX() / SIZE) - 1][(int)form.square1.getY() / SIZE];
-            if (maovea == 0 && maoveb == 0 && maovec == 0 && maovec == 0) {
+        if (form.square1.getX() - MOVE >= END_FIELD && form.square2.getX() - MOVE >= END_FIELD &&
+                form.square3.getX() - MOVE >= END_FIELD && form.square4.getY() - MOVE >= END_FIELD) {
+            int maovea = MESH[((int)form.square1.getX()) / SIZE - OFFSET_LEFT][(int)form.square1.getY() / SIZE];
+            int maoveb = MESH[((int)form.square2.getX() / SIZE) - OFFSET_LEFT][(int)form.square1.getY() / SIZE];
+            int maovec = MESH[((int)form.square3.getX() / SIZE) - OFFSET_LEFT][(int)form.square1.getY() / SIZE];
+            int maoved = MESH[((int)form.square4.getX() / SIZE) - OFFSET_LEFT][(int)form.square1.getY() / SIZE];
+            if (maovea == END_FIELD && maoveb == END_FIELD && maovec == END_FIELD && maoved == END_FIELD) {
                 form.square1.setX(form.square1.getX() - MOVE);
                 form.square2.setX(form.square2.getX() - MOVE);
                 form.square3.setX(form.square3.getX() - MOVE);
@@ -118,19 +119,19 @@ public class Model {
             if (form.square1.getY() == YMAX - SIZE || form.square2.getY() == YMAX - SIZE ||
                     form.square3.getY() == YMAX - SIZE || form.square4.getY() == YMAX - SIZE || moveA(form) || moveB(form)
                     || moveC(form) || moveD(form)) {
-                MESH[((int) form.square1.getX()) / SIZE][((int) form.square1.getY()) / SIZE] = 1;
-                MESH[((int) form.square2.getX()) / SIZE][((int) form.square2.getY()) / SIZE] = 1;
-                MESH[((int) form.square3.getX()) / SIZE][((int) form.square3.getY()) / SIZE] = 1;
-                MESH[((int) form.square4.getX()) / SIZE][((int) form.square4.getY()) / SIZE] = 1;
+                MESH[((int) form.square1.getX()) / SIZE][((int) form.square1.getY()) / SIZE] = NOT_EMPTY_PLACE;
+                MESH[((int) form.square2.getX()) / SIZE][((int) form.square2.getY()) / SIZE] = NOT_EMPTY_PLACE;
+                MESH[((int) form.square3.getX()) / SIZE][((int) form.square3.getY()) / SIZE] = NOT_EMPTY_PLACE;
+                MESH[((int) form.square4.getX()) / SIZE][((int) form.square4.getY()) / SIZE] = NOT_EMPTY_PLACE;
                 removeRows(group);
                 Controller.generationNewRect();
             }
             if (form.square1.getY() + MOVE < YMAX && form.square2.getY() + MOVE < YMAX && form.square3.getY() + MOVE < YMAX
                     && form.square4.getY() + MOVE < YMAX) {
-                int movea = MESH[(int) form.square1.getX() / SIZE][((int) form.square1.getY() / SIZE) + 1];
-                int moveb = MESH[(int) form.square2.getX() / SIZE][((int) form.square2.getY() / SIZE) + 1];
-                int movec = MESH[(int) form.square3.getX() / SIZE][((int) form.square3.getY() / SIZE) + 1];
-                int moved = MESH[(int) form.square4.getX() / SIZE][((int) form.square4.getY() / SIZE) + 1];
+                int movea = MESH[(int) form.square1.getX() / SIZE][((int) form.square1.getY() / SIZE) + OFFSET_RIGHT];
+                int moveb = MESH[(int) form.square2.getX() / SIZE][((int) form.square2.getY() / SIZE) + OFFSET_RIGHT];
+                int movec = MESH[(int) form.square3.getX() / SIZE][((int) form.square3.getY() / SIZE) + OFFSET_RIGHT];
+                int moved = MESH[(int) form.square4.getX() / SIZE][((int) form.square4.getY() / SIZE) + OFFSET_RIGHT];
                 if (movea == 0 && movea == moveb && moveb == movec && movec == moved) {
                     form.square1.setY(form.square1.getY() + MOVE);
                     form.square2.setY(form.square2.getY() + MOVE);
@@ -142,24 +143,24 @@ public class Model {
 
     }
     private static boolean moveA(GenerationFigure form) {
-        return (MESH[(int) form.square1.getX() / SIZE][((int) form.square1.getY() / SIZE) + 1] == 1);
+        return (MESH[(int) form.square1.getX() / SIZE][((int) form.square1.getY() / SIZE) + OFFSET_RIGHT] == NOT_EMPTY_PLACE);
     }
 
     private static boolean moveB(GenerationFigure form) {
-        return (MESH[(int) form.square2.getX() / SIZE][((int) form.square2.getY() / SIZE) + 1] == 1);
+        return (MESH[(int) form.square2.getX() / SIZE][((int) form.square2.getY() / SIZE) + OFFSET_RIGHT] == NOT_EMPTY_PLACE);
     }
 
     private static boolean moveC(GenerationFigure form) {
-        return (MESH[(int) form.square3.getX() / SIZE][((int) form.square3.getY() / SIZE) + 1] == 1);
+        return (MESH[(int) form.square3.getX() / SIZE][((int) form.square3.getY() / SIZE) + OFFSET_RIGHT] == NOT_EMPTY_PLACE);
     }
 
     private static boolean moveD(GenerationFigure form) {
-        return (MESH[(int) form.square4.getX() / SIZE][((int) form.square4.getY() / SIZE) + 1] == 1);
+        return (MESH[(int) form.square4.getX() / SIZE][((int) form.square4.getY() / SIZE) + OFFSET_RIGHT] == NOT_EMPTY_PLACE);
     }
     private static void removeRows(Pane pane) {
-        ArrayList<Node> rects = new ArrayList<Node>();
+        ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
         ArrayList<Integer> lines = new ArrayList<Integer>();
-        ArrayList<Node> newrects = new ArrayList<Node>();
+        ArrayList<Rectangle> newrects = new ArrayList<Rectangle>();
         int full = 0;
         for (int i = 0; i < MESH[0].length; i++) {
             for (int j = 0; j < MESH.length; j++) {
@@ -171,13 +172,19 @@ public class Model {
             full = 0;
         }
         while (lines.size() > 0) {
-                for (Node node : pane.getChildren()) {
-                    if (node instanceof Rectangle)
-                        rects.add(node);
+            for (int i = 0; i < pane.getChildren().size(); ++i) {
+                if (pane.getChildren().get(i) instanceof Rectangle) {
+                    rects.add((Rectangle) pane.getChildren().get(i));
                 }
+            }
+
+//                for (Node node : pane.getChildren()) {
+//                    if (node instanceof Rectangle)
+//                        rects.add(node);
+//                }
                 linesNo++;
 
-                for (Node node : rects) {
+                for (Rectangle node : rects) {
                     Rectangle a = (Rectangle) node;
                     if (a.getY() == lines.get(0) * SIZE) {
                         MESH[(int) a.getX() / SIZE][(int) a.getY() / SIZE] = 0;
@@ -186,7 +193,7 @@ public class Model {
                         newrects.add(node);
                 }
 
-                for (Node node : newrects) {
+                for (Rectangle node : newrects) {
                     Rectangle a = (Rectangle) node;
                     if (a.getY() < lines.get(0) * SIZE) {
                         MESH[(int) a.getX() / SIZE][(int) a.getY() / SIZE] = 0;
@@ -196,11 +203,16 @@ public class Model {
                 lines.remove(0);
                 rects.clear();
                 newrects.clear();
-                for (Node node : pane.getChildren()) {
-                    if (node instanceof Rectangle)
-                        rects.add(node);
+//                for (Node node : pane.getChildren()) {
+//                    if (node instanceof Rectangle)
+//                        rects.add(node);
+//                }
+            for (int i = 0; i < pane.getChildren().size(); ++i) {
+                if (pane.getChildren().get(i) instanceof Rectangle) {
+                    rects.add((Rectangle) pane.getChildren().get(i));
                 }
-                for (Node node : rects) {
+            }
+                for (Rectangle node : rects) {
                     Rectangle a = (Rectangle) node;
                     try {
                         MESH[(int) a.getX() / SIZE][(int) a.getY() / SIZE] = 1;
@@ -213,7 +225,7 @@ public class Model {
     public static int getLine() {
         return linesNo;
     }
-    public static boolean cB(Rectangle rect, int x, int y) {
+    public static boolean controllingTurn(Rectangle rect, int x, int y) {
         boolean xb = false;
         boolean yb = false;
         if (x >= 0)

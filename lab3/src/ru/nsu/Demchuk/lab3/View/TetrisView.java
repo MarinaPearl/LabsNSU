@@ -19,6 +19,8 @@ import java.util.TimerTask;
 import static ru.nsu.Demchuk.lab3.View.Constants.*;
 
 public class TetrisView implements View {
+    private Line line;
+    private Text level;
     private static Pane group = new Pane();
     private static GenerationFigure object;
     private static Scene scene = new Scene(group, XMAX + 150, YMAX, Color.BLACK);
@@ -51,16 +53,10 @@ public class TetrisView implements View {
         ImageView img = new ImageView(image);
         img.setFitWidth(FIELD_WIDTH);
         img.setFitHeight(FIELD_HEIGHT);
+        setLine();
+        setLevel();
         group.getChildren().add(img);
-        Line line = new Line(XMAX, NULL_SET, XMAX, YMAX);
-        line.setStroke(Color.WHITE);
-        Text level = new Text("Lines: ");
-        level.setStyle("-fx-font: 20 arial;");
-        level.setY(LEVEL_Y);
-        level.setX(XMAX + LEVEL_X);
-        level.setFill(Color.PINK);
         group.getChildren().addAll(line, level);
-
         GenerationFigure a = nextObj;
         group.getChildren().addAll(a.square1, a.square2, a.square3, a.square4);
         Controller.moveOnKeyPress(a, scene, group);
@@ -112,5 +108,17 @@ public class TetrisView implements View {
         object = a;
         group.getChildren().addAll(a.square1, a.square2, a.square3, a.square4);
         Controller.moveOnKeyPress(a, scene, group);
+    }
+    private void setLine() {
+        line = new Line(XMAX, NULL_SET, XMAX, YMAX);
+        line.setStroke(Color.WHITE);
+    }
+    private void setLevel() {
+        level = new Text("Lines: ");
+        level.setStyle("-fx-font: 20 arial;");
+        level.setY(LEVEL_Y);
+        level.setX(XMAX + LEVEL_X);
+        level.setFill(Color.PINK);
+
     }
 }

@@ -28,10 +28,10 @@ public class AboutView {
     private static final int POSSITION_TEXT_Y = 250;
     private static final double OPACITY_BUTTON = 0.5;
     private static final int FONT_SIZE = 33;
+    private Text text;
     private static final String STYLE_BUTTON = "-fx-font: 24 arial; -fx-background-color:#000080";
     private static final String FONT = "Arial";
     public AboutView(Stage stage) {
-        back = new Button(NAME_BUTTON);
         pane = new Pane();
         this.stage = stage;
     }
@@ -41,24 +41,30 @@ public class AboutView {
         img.setFitWidth(FIELD_WIDTH);
         img.setFitHeight(FIELD_HEIGHT);
         pane.getChildren().add(img);
+        setButton();
+        setText();
         Scene scene = new Scene(pane, FIELD_WIDTH, FIELD_HEIGHT);
+        back.setOnMouseClicked(event -> {
+            AboutController.doBack(stage);
+        });
+        pane.getChildren().addAll(back, text);
+        stage.setScene(scene);
+        stage.show();
+    }
+    private void setButton() {
+        back = new Button(NAME_BUTTON);
         back.setTranslateX(POSSITION_BUTTON_X);
         back.setTranslateY(POSSITION_BUTTON_Y);
         back.setPrefSize(SIZE_BUTTON_X, SIZE_BUTTON_Y);
         back.setTextFill(Color.WHITE);
-        Text text = new Text(EMAIL);
+        back.setStyle(STYLE_BUTTON);
+        back.setOpacity(OPACITY_BUTTON);
+    }
+    private void setText() {
+        text = new Text(EMAIL);
         text.setX(POSSITION_TEXT_X);
         text.setY(POSSITION_TEXT_Y);
         text.setFill(Color.WHITE);
         text.setFont(Font.font(FONT, FontWeight.BOLD,FONT_SIZE));
-        back.setStyle(STYLE_BUTTON);
-        back.setOpacity(OPACITY_BUTTON);
-        back.setOnMouseClicked(event -> {
-            AboutController.doBack(stage);
-        });
-        pane.getChildren().addAll(back);
-        pane.getChildren().addAll(text);
-        stage.setScene(scene);
-        stage.show();
     }
 }

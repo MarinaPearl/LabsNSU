@@ -3,6 +3,8 @@ package ru.nsu.Demchuk.lab3.View;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import static ru.nsu.Demchuk.lab3.View.Constants.*;
+
 public class GenerationFigure {
     public Rectangle square1;
     public Rectangle square2;
@@ -20,25 +22,25 @@ public class GenerationFigure {
         this.square4 = d;
         this.name = name;
         switch (name) {
-            case "j":
+            case SHAPE_ONE:
                 color = Color.PINK;
                 break;
-            case "l":
+            case SHAPE_TWO:
                 color = Color.GREY;
                 break;
-            case "o":
+            case SHAPE_THREE:
                 color = Color.BLUE;
                 break;
-            case "s":
+            case SHAPE_FOUR:
                 color = Color.BISQUE;
                 break;
-            case "t":
+            case SHAPE_FIVE:
                 color = Color.DEEPSKYBLUE;
                 break;
-            case "z":
+            case SHAPE_SIX:
                 color = Color.CORAL;
                 break;
-            case "i":
+            case SHAPE_SEVEN:
                 color = Color.LIGHTPINK;
                 break;
 
