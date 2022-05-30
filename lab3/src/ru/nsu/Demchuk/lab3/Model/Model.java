@@ -15,6 +15,8 @@ import static ru.nsu.Demchuk.lab3.View.Constants.*;
 public class Model {
     public static int[][] MESH = new int[XMAX / SIZE][YMAX / SIZE];
     private static int linesNo = 0;
+    private static final int NULL_SET = 0;
+    private static final int SET = 1;
     public  static GenerationFigure makeRect() {
         int block = (int) (Math.random() * ALIGMENT);
         String name;
@@ -88,7 +90,7 @@ public class Model {
                 int moveb = MESH[((int) form.square2.getX() / SIZE) + OFFSET_RIGHT][((int) form.square2.getY() / SIZE)];
                 int movec = MESH[((int) form.square3.getX() / SIZE) + OFFSET_RIGHT][((int) form.square3.getY() / SIZE)];
                 int moved = MESH[((int) form.square4.getX() / SIZE) + OFFSET_RIGHT][((int) form.square4.getY() / SIZE)];
-                if (movea == 0 && movea == moveb && moveb == movec && movec == moved) {
+                if (movea == NULL_SET && movea == moveb && moveb == movec && movec == moved) {
                     form.square1.setX(form.square1.getX() + MOVE);
                     form.square2.setX(form.square2.getX() + MOVE);
                     form.square3.setX(form.square3.getX() + MOVE);
@@ -161,17 +163,17 @@ public class Model {
         ArrayList<Rectangle> rects = new ArrayList<Rectangle>();
         ArrayList<Integer> lines = new ArrayList<Integer>();
         ArrayList<Rectangle> newrects = new ArrayList<Rectangle>();
-        int full = 0;
-        for (int i = 0; i < MESH[0].length; i++) {
-            for (int j = 0; j < MESH.length; j++) {
-                if (MESH[j][i] == 1)
+        int full = NULL_SET;
+        for (int i = NULL_SET; i < MESH[0].length; i++) {
+            for (int j = NULL_SET; j < MESH.length; j++) {
+                if (MESH[j][i] == SET)
                     full++;
             }
             if (full == MESH.length)
                 lines.add(i);
-            full = 0;
+            full = NULL_SET;
         }
-        while (lines.size() > 0) {
+        while (lines.size() > NULL_SET) {
             for (int i = 0; i < pane.getChildren().size(); ++i) {
                 if (pane.getChildren().get(i) instanceof Rectangle) {
                     rects.add((Rectangle) pane.getChildren().get(i));
@@ -186,8 +188,8 @@ public class Model {
 
                 for (Rectangle node : rects) {
                     Rectangle a = (Rectangle) node;
-                    if (a.getY() == lines.get(0) * SIZE) {
-                        MESH[(int) a.getX() / SIZE][(int) a.getY() / SIZE] = 0;
+                    if (a.getY() == lines.get(NULL_SET) * SIZE) {
+                        MESH[(int) a.getX() / SIZE][(int) a.getY() / SIZE] = NULL_SET;
                         pane.getChildren().remove(node);
                     } else
                         newrects.add(node);
@@ -195,19 +197,19 @@ public class Model {
 
                 for (Rectangle node : newrects) {
                     Rectangle a = (Rectangle) node;
-                    if (a.getY() < lines.get(0) * SIZE) {
-                        MESH[(int) a.getX() / SIZE][(int) a.getY() / SIZE] = 0;
+                    if (a.getY() < lines.get(NULL_SET) * SIZE) {
+                        MESH[(int) a.getX() / SIZE][(int) a.getY() / SIZE] = NULL_SET;
                         a.setY(a.getY() + SIZE);
                     }
                 }
-                lines.remove(0);
+                lines.remove(NULL_SET);
                 rects.clear();
                 newrects.clear();
 //                for (Node node : pane.getChildren()) {
 //                    if (node instanceof Rectangle)
 //                        rects.add(node);
 //                }
-            for (int i = 0; i < pane.getChildren().size(); ++i) {
+            for (int i = NULL_SET; i < pane.getChildren().size(); ++i) {
                 if (pane.getChildren().get(i) instanceof Rectangle) {
                     rects.add((Rectangle) pane.getChildren().get(i));
                 }
@@ -228,15 +230,15 @@ public class Model {
     public static boolean controllingTurn(Rectangle rect, int x, int y) {
         boolean xb = false;
         boolean yb = false;
-        if (x >= 0)
+        if (x >= NULL_SET)
             xb = rect.getX() + x * MOVE <= XMAX - SIZE;
-        if (x < 0)
-            xb = rect.getX() + x * MOVE >= 0;
-        if (y >= 0)
-            yb = rect.getY() - y * MOVE > 0;
-        if (y < 0)
+        if (x < NULL_SET)
+            xb = rect.getX() + x * MOVE >= NULL_SET;
+        if (y >= NULL_SET)
+            yb = rect.getY() - y * MOVE > NULL_SET;
+        if (y < NULL_SET)
             yb = rect.getY() + y * MOVE < YMAX;
-        return xb && yb && MESH[((int) rect.getX() / SIZE) + x][((int) rect.getY() / SIZE) - y] == 0;
+        return xb && yb && MESH[((int) rect.getX() / SIZE) + x][((int) rect.getY() / SIZE) - y] == NULL_SET;
     }
     public static int getLinesNo() {
         return linesNo;

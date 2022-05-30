@@ -34,6 +34,9 @@ public class TetrisView implements View {
     private static final int TOP_EXIT = 5;
     private static final int GAME_X = 10;
     private static final int GAME_Y = 250;
+    private static final String GAME_OVER = "-fx-font: 70 arial;";
+    private static final String STYLE_LINE = "-fx-font: 20 arial;";
+    private static final String LINE = "Lines: ";
     private static int lines;
     private boolean game;
     private static GenerationFigure nextObj = Controller.createFigure();
@@ -82,7 +85,7 @@ public class TetrisView implements View {
                             gameOver.setFill(Color.RED);
                             gameOver.setX(GAME_X);
                             gameOver.setY(GAME_Y);
-                            gameOver.setStyle("-fx-font: 70 arial;");
+                            gameOver.setStyle(GAME_OVER);
                             group.getChildren().add(gameOver);
                             game = false;
                         }
@@ -92,7 +95,7 @@ public class TetrisView implements View {
                         if (game) {
                             Controller.doDown(object, group);
                             lines = Model.getLine();
-                            level.setText("Lines: " + Integer.toString(lines));
+                            level.setText(LINE + Integer.toString(lines));
                         } else {
 
                         }
@@ -114,8 +117,8 @@ public class TetrisView implements View {
         line.setStroke(Color.WHITE);
     }
     private void setLevel() {
-        level = new Text("Lines: ");
-        level.setStyle("-fx-font: 20 arial;");
+        level = new Text(LINE);
+        level.setStyle(STYLE_LINE);
         level.setY(LEVEL_Y);
         level.setX(XMAX + LEVEL_X);
         level.setFill(Color.PINK);

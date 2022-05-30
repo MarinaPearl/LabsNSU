@@ -14,10 +14,10 @@ public class MenuController {
        RegistrationView registration = new RegistrationView(primaryStage);
        registration.makeRegistration();
    }
-   public static void exit() {
-       System.exit(EXIT);
+   public static void exit(Stage stage) {
+       stage.close();
    }
-   public static void showStatistic(Stage primaryStage) throws IOException {
+   public static void showStatistic(Stage primaryStage) throws IOException, ClassNotFoundException {
        HashMap<String, Integer> statisticMap = ModelStatistic.getSortedMap();
        StatisticView game = new StatisticView(primaryStage);
        game.doStatistic(statisticMap);

@@ -84,12 +84,14 @@ public class Main extends Application {
             MenuController.play(stage);
         });
         exitGame.setOnMouseClicked(event -> {
-            MenuController.exit();
+            MenuController.exit(stage);
         });
         statistic.setOnMouseClicked(event -> {
             try {
                 MenuController.showStatistic(stage);
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
         });
