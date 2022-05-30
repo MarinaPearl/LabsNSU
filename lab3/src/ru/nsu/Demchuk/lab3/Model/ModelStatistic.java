@@ -14,12 +14,9 @@ public  class ModelStatistic {
    private static FileReader reader;
    private static  final String PATH_TO_STATISTIC = "static.txt";
    private static  final String PATH_TO_CLASS = "ru.nsu.Demchuk.lab3.Model.ModelStatistic";
-//    public ModelStatistic () {
-//        sortedMap = new HashMap<String, Integer>();
-//    }
     public static HashMap<String, Integer> getSortedMap() throws IOException, ClassNotFoundException {
         try {
-            reader = new FileReader((String.valueOf(Class.forName(PATH_TO_CLASS).getResource(PATH_TO_STATISTIC))));
+            reader = new FileReader("D:/labsNsuJava/lab3/src/ru/nsu/Demchuk/lab3/Model/statistic.txt");
             Scanner scanner = new Scanner(reader);
             String s;
             int k = 0;
@@ -58,14 +55,9 @@ public  class ModelStatistic {
         reader.close();
         int lines = Model.getLine();
         String name = RegistrationView.getName();
-        FileWriter w = new FileWriter(String.valueOf(Class.forName(PATH_TO_CLASS).getResource(PATH_TO_STATISTIC)));
+        writer = new FileWriter("D:/labsNsuJava/lab3/src/ru/nsu/Demchuk/lab3/Model/statistic.txt", true);
         if (name != null)
-       // w.write(name + " " + lines + "\n");
-       // w.close();
-       //
-       //
         sortedMap.put(name, lines);
-        //System.out.println(sortedMap.size());
         HashMap<String, Integer> map = sortedMap.entrySet().stream()
                .sorted(Comparator.comparingInt(e -> -e.getValue()))
                .collect(Collectors.toMap(
@@ -76,9 +68,9 @@ public  class ModelStatistic {
                ));
         for (Map.Entry<String, Integer> map1: map.entrySet()) {
             if (map1.getKey() != null)
-            w.write(map1.getKey() + " " + map1.getValue() + "\n");
+            writer.write(map1.getKey() + " " + map1.getValue() + "\n");
         }
-        w.close();
+        writer.close();
         return map;
     }
 }
