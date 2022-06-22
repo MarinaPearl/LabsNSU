@@ -1,10 +1,13 @@
 package lab5.demchuk.client.clientjavafx.clientveb;
 
+import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
@@ -14,6 +17,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import lab5.demchuk.client.clientjavafx.controller.ControllerClient;
 import lab5.demchuk.client.clientjavafx.controller.ControllerRegistration;
 
 public class RegistrartionView {
@@ -61,6 +65,17 @@ public class RegistrartionView {
         textField.setPrefColumnCount(18);
         textField.setPrefHeight(35);
         textField.setOpacity(0.5);
+//        textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent keyEvent) {
+//                if (keyEvent.getCode() == KeyCode.ENTER)  {
+//                    System.out.println("enter");
+//                    ControllerRegistration.getName(textField.getText());
+//                    //ControllerClient.setMessage(textField.getText());
+//                    textField.clear();
+//                }
+//            }
+//        });
     }
 
     private void setText() {
@@ -72,8 +87,9 @@ public class RegistrartionView {
     }
 
     public static String getName() {
-        name = textField.getText();
-        return name;
+
+       System.out.println("Name1 " + textField.getText());
+        return textField.getText();
     }
 
 }

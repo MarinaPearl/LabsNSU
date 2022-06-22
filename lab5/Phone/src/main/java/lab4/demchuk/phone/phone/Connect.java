@@ -38,7 +38,7 @@ public class Connect {
             writer.flush();
         } catch (IOException error) {
             close();
-           error.printStackTrace();
+           //error.printStackTrace();
         }
     }
 
@@ -56,19 +56,24 @@ public class Connect {
             throw new RuntimeException("reder is not true");
         }
     }
-    public String readLineSystem() throws IOException {
+    public String readLineSystem() {
         String str = null;
         try {
             str =  readerInSystem.readLine();
         } catch (IOException error) {
-            close();
-            error.printStackTrace();
+            try {
+                close();
+            }catch (IOException e) {
+
+            }
+            //error.printStackTrace();
         }
         if (str != null) {
             return str;
         } else {
-            throw new RuntimeException("rederSystem is not true");
+            //throw new RuntimeException("rederSystem is not true");
         }
+        return null;
     }
 
 
