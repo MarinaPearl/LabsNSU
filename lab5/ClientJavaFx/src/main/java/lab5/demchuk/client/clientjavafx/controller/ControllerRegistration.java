@@ -7,12 +7,13 @@ import lab5.demchuk.client.clientjavafx.model.Client;
 public class ControllerRegistration {
     private Stage stage;
     private static String name;
+    private static final int NULL_SET = 0;
     public void closeWindow(Stage stage)
     {
        this.stage = stage;
       // this.name = name;
        this.name = RegistrartionView.getName();
-       if (name.hashCode() != 0) {
+       if (name.hashCode() != NULL_SET) {
            stage.close();
        }
     }

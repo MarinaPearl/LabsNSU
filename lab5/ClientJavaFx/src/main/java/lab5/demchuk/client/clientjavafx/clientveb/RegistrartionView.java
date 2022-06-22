@@ -20,6 +20,8 @@ import javafx.stage.Stage;
 import lab5.demchuk.client.clientjavafx.controller.ControllerClient;
 import lab5.demchuk.client.clientjavafx.controller.ControllerRegistration;
 
+import static lab5.demchuk.client.clientjavafx.clientveb.ConstantsView.*;
+
 public class RegistrartionView {
     private static TextField textField;
     private Text text;
@@ -43,52 +45,40 @@ public class RegistrartionView {
         });
         pane.setBackground(new Background(new BackgroundFill(Color.DARKSEAGREEN, null, null)));
         pane.getChildren().addAll(textField, text, go);
-        Scene scene = new Scene(pane, 400, 200);
+        Scene scene = new Scene(pane, SCENE_X, SCENE_Y);
         stage.setScene(scene);
         stage.setTitle(this.str);
         stage.showAndWait();
     }
 
     private void setButton() {
-        go = new Button("GO");
-        go.setTranslateX(155);
-        go.setTranslateY(150);
-        go.setPrefSize(100, 30);
-        go.setStyle("-fx-font: 12 arial; -fx-background-color:#339966 ; " +
-                "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 )");
+        go = new Button(NAME_BUTTON_GO);
+        go.setTranslateX(GO_X);
+        go.setTranslateY(GO_Y);
+        go.setPrefSize(BUTTON_HEIGHT, BUTTON_WEIGHT);
+        go.setStyle(STYLE_BACK_BUTTON + STYLE_FRONT_BUTTON);
     }
 
     private void setTextField() {
         textField = new TextField();
-        textField.setLayoutX(100);
-        textField.setLayoutY(100);
-        textField.setPrefColumnCount(18);
-        textField.setPrefHeight(35);
-        textField.setOpacity(0.5);
-//        textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent keyEvent) {
-//                if (keyEvent.getCode() == KeyCode.ENTER)  {
-//                    System.out.println("enter");
-//                    ControllerRegistration.getName(textField.getText());
-//                    //ControllerClient.setMessage(textField.getText());
-//                    textField.clear();
-//                }
-//            }
-//        });
+        textField.setLayoutX(TEXT_FIELD_X);
+        textField.setLayoutY(TEXT_FIELD_Y);
+        textField.setPrefColumnCount(TEXT_FIELD_PREF);
+        textField.setPrefHeight(TEXT_FIELD_HEIGHT);
+        textField.setOpacity(TEXT_FIELD_OPACITY);
     }
 
     private void setText() {
-        text = new Text("Your name?");
-        text.setX(110);
-        text.setY(50);
-        text.setFont(Font.font("Arial", FontWeight.BOLD, 32));
+        text = new Text(QUESTION);
+        text.setX(TEXT_WINDOW_X);
+        text.setY(TEXT_WINDOW_Y);
+        text.setFont(Font.font(FONT, FontWeight.BOLD, TEXT_SIZE_FONT));
         text.setFill(Color.WHITE);
     }
 
     public static String getName() {
 
-       System.out.println("Name1 " + textField.getText());
+       //System.out.println("Name1 " + textField.getText());
         return textField.getText();
     }
 

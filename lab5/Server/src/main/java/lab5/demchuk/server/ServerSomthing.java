@@ -17,7 +17,8 @@ public class ServerSomthing extends Thread {
     private InputStream input;
     private Properties prop;
     private static String PATH_TO_PROPERTY = "file.properties";
-
+   private static final int NULL_SIZE = 0;
+   private static final int FLAG = 1;
     public ServerSomthing(Connect connect) throws IOException {
         this.input = Server.class.getClassLoader().getResourceAsStream(PATH_TO_PROPERTY);
         prop = new Properties();
@@ -34,42 +35,33 @@ public class ServerSomthing extends Thread {
         try {
             while (true) {
                 word = connect.readLine();
-                if (word.equals("stop")) {
-                    this.downService();
-                    break;
-                }
-                System.out.println("Echoing: " + word);
+//                if (word.equals("stop")) {
+//                    this.downService();
+//                    break;
+//                }
+                //System.out.println("Echoing: " + word);
                 // Server.story.addStoryEl(word);
                 Gson gson = new Gson();
                 TypeCommand command = (TypeCommand) Class.forName(
                         prop.getProperty(gson.fromJson(word, ReaderClass.class).getCommand())).newInstance();
                 command = gson.fromJson(word, command.getClass());
                 command.runCommand();
-                System.out.println("after runCommand");
                 word = gson.toJson(command);
-                System.out.println("after gson");
                 for (ServerSomthing vr : Server.serverList) {
                     vr.send(word);
                 }
-                System.out.println("1");
-                if (count == 0) {
+                if (count == NULL_SIZE) {
                     Server.listofClients.add(word);
-                    if (Server.story.story.size() > 0) {
-                        //connect.writeLine("History messages");
+                    if (Server.story.story.size() > NULL_SIZE) {
                         for (String vr : Server.story.story) {
                             send(vr);
-                            //connect.writeLine(vr + "\n");
+
                         }
-                        //connect.writeLine("/....");
 
                     }
-                    //Server.story.printStory(this.connect);
-                    count = 1;
+                    count = FLAG;
                 }
-                System.out.println("2");
                 Server.story.story.add(word);
-                // Server.story.addStoryEl(word);
-                System.out.println("3");
 
             }
         } catch (NullPointerException | IOException ignored) {

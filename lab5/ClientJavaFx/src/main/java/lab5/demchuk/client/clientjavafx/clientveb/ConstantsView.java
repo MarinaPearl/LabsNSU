@@ -1,0 +1,66 @@
+package lab5.demchuk.client.clientjavafx.clientveb;
+
+import javafx.scene.layout.Pane;
+
+public class ConstantsView {
+    public static final int LENGTH = 800;
+    public static final int WIDTH = 600;
+    public static final String NAME_CHAT = "Whats App";
+    public static final String STYLE_TEXT = "-fx-font: 17 arial";
+    public static final int LIST_X = 570;
+    public static final int LIST_Y = 8;
+    public static final int LIST_HEIGHT = 470;
+    public static final int LIST_WIDTH = 227;
+    public static final double OPACITY = 0.7;
+    public static final String LIST_PROMPT_TEXT ="List of Clients";
+    public static final int CHAT_X = 0;
+    public static final int CHAT_Y = 10;
+    public static final int CHAT_HEIGHT = 540;
+    public static final int CHAT_WEIGHT = 560;
+    public static final String CHAT_PROMPT_TEXT = "WHATS APP";
+    public static final int TEXT_AREA_X = 0;
+    public static final int TEXT_AREA_Y = 561;
+    public static final int TEXT_AREA_HEIGHT = 400;
+    public static final int TEXT_AREA_WEIGHT = 560;
+    public static final String TEXT_AREA_PROMPT_TEXT = "Message";
+    public static final double TEXT_AREA_OPACITY = 0.8;
+    public static final String TEXT_AREA_STYLE = "-fx-font: 20 arial";
+    public static final String NAME_BUTTON_CONNECT = "CONNECT";
+    public static final String NAME_BUTTON_DISCONNECT = "DISCONNECT";
+    public static final String NAME_BUTTON_LIST = "LIST";
+    public static final String STYLE_BACK_BUTTON = "-fx-font: 12 arial; -fx-background-color:#339966 ; ";
+    public static final String STYLE_FRONT_BUTTON = "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 )";
+    public static final int LIST_BUTTON_X = 690;
+    public static final int LIST_BUTTON_Y = 500;
+    public static final int LIST_BUTTON_HEIGHT = 100;
+    public static final int LIST_BUTTON_WEIGHT = 30;
+    public static final int BUTTON_Y = 550;
+    public static final int BUTTON_HEIGHT = 100;
+    public static final int BUTTON_WEIGHT = 30;
+    public static final int CONNECT_X = 570;
+    public static final int DISCONNECT_X = 690;
+    public static final int LINE_X = 565;
+    public static final int LINE_Y = 0;
+    public static final int LINE_Y2 = 600;
+    public static final int LINE_WIDTH = 5;
+    public static final String DATA_FORMAT = "HH:mm:ss";
+    public static final String USER_NAME = "New User: ";
+    public static final String USER_STRING = "User: ";
+    public static final String USER_LEFT = "has left this chat\n";
+    public static final int SCENE_X = 400;
+    public static final int SCENE_Y = 200;
+    public static final String NAME_BUTTON_GO = "GO";
+    public static final int GO_X = 155;
+    public static final int GO_Y = 150;
+    public static final int TEXT_FIELD_X = 100;
+    public static final int TEXT_FIELD_Y = 100;
+    public static final int TEXT_FIELD_PREF = 18;
+    public static final int TEXT_FIELD_HEIGHT = 35;
+    public static final double  TEXT_FIELD_OPACITY = 0.5;
+    public static final String QUESTION = "Your name?";
+    public static final String FONT = "Arial";
+    public static final int TEXT_WINDOW_X = 110;
+    public static final int TEXT_WINDOW_Y = 50;
+    public static final int TEXT_SIZE_FONT = 32;
+
+}

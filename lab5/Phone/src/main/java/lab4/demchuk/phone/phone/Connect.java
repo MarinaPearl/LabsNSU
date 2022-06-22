@@ -8,6 +8,7 @@ public class Connect {
     private BufferedReader reader;
     private BufferedReader readerInSystem;
     private Socket socket;
+    private static final String error = "reader is not true";
     public Connect(Socket socket) throws IOException {
         this.socket = socket;
         this.reader = createReader();
@@ -53,28 +54,28 @@ public class Connect {
         if (str != null) {
             return str;
         } else {
-            throw new RuntimeException("reder is not true");
+            throw new RuntimeException(error);
         }
     }
-    public String readLineSystem() {
-        String str = null;
-        try {
-            str =  readerInSystem.readLine();
-        } catch (IOException error) {
-            try {
-                close();
-            }catch (IOException e) {
-
-            }
-            //error.printStackTrace();
-        }
-        if (str != null) {
-            return str;
-        } else {
-            //throw new RuntimeException("rederSystem is not true");
-        }
-        return null;
-    }
+//    public String readLineSystem() {
+//        String str = null;
+//        try {
+//            str =  readerInSystem.readLine();
+//        } catch (IOException error) {
+//            try {
+//                close();
+//            }catch (IOException e) {
+//
+//            }
+//            //error.printStackTrace();
+//        }
+//        if (str != null) {
+//            return str;
+//        } else {
+//            //throw new RuntimeException("rederSystem is not true");
+//        }
+//        return null;
+//    }
 
 
 }

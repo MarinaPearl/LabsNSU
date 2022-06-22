@@ -20,6 +20,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static lab5.demchuk.client.clientjavafx.clientveb.ConstantsView.*;
+
 public class ClientView extends Application {
     private Pane group;
     private Scene scene;
@@ -34,13 +36,13 @@ public class ClientView extends Application {
     public void start(Stage stage) {
         setChat();
         group = new Pane();
-        scene = new Scene(group, 800, 600);
+        scene = new Scene(group, LENGTH, WIDTH);
        group.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, null, null)));
         makeButton();
         addLine();
         setTextArea();
         setList();
-        String str = "Telegram";
+        String str = NAME_CHAT;
         setButtonConnect(connection);
         setButtonDisConnect(disConnection);
         setButtonList(list);
@@ -56,44 +58,44 @@ public class ClientView extends Application {
                stage.close();
         });
         stage.setScene(scene);
-        stage.setTitle("Telegram");
+        stage.setTitle(NAME_CHAT);
         stage.show();
 
     }
     private void setList() {
         listOfClients = new TextArea();
-        listOfClients.setTranslateX(570);
-        listOfClients.setTranslateY(8);
-        listOfClients.setPrefHeight(470);
-        listOfClients.setPrefWidth(227);
+        listOfClients.setTranslateX(LIST_X);
+        listOfClients.setTranslateY(LIST_Y);
+        listOfClients.setPrefHeight(LIST_HEIGHT);
+        listOfClients.setPrefWidth(LIST_WIDTH);
         listOfClients.setWrapText(true);
-        listOfClients.setOpacity(0.7);
-        listOfClients.setStyle("-fx-font: 17 arial");
+        listOfClients.setOpacity(OPACITY);
+        listOfClients.setStyle(STYLE_TEXT);
         listOfClients.setEditable(false);
-        listOfClients.setPromptText("List of Clients");
+        listOfClients.setPromptText(LIST_PROMPT_TEXT);
     }
     private void setChat() {
         chat = new TextArea();
-        chat.setTranslateX(0);
-        chat.setTranslateY(10);
-        chat.setPrefHeight(540);
-        chat.setPrefWidth(560);
+        chat.setTranslateX(CHAT_X);
+        chat.setTranslateY(CHAT_Y);
+        chat.setPrefHeight(CHAT_HEIGHT);
+        chat.setPrefWidth(CHAT_WEIGHT);
         chat.setWrapText(true);
-        chat.setOpacity(0.7);
-        chat.setStyle("-fx-font: 17 arial");
+        chat.setOpacity(OPACITY);
+        chat.setStyle(STYLE_TEXT);
         chat.setEditable(false);
-        chat.setPromptText("TELEGRAM");
+        chat.setPromptText(CHAT_PROMPT_TEXT);
     }
    private void setTextArea() {
         textArea = new TextArea();
-        textArea.setTranslateX(0);
-        textArea.setTranslateY(561);
-        textArea.setPrefHeight(400);
-        textArea.setPrefWidth(560);
-        textArea.setPromptText("Message");
+        textArea.setTranslateX(TEXT_AREA_X);
+        textArea.setTranslateY(TEXT_AREA_Y);
+        textArea.setPrefHeight(TEXT_AREA_HEIGHT);
+        textArea.setPrefWidth(TEXT_AREA_WEIGHT);
+        textArea.setPromptText(TEXT_AREA_PROMPT_TEXT);
         textArea.setWrapText(true);
-        textArea.setOpacity(0.8);
-        textArea.setStyle("-fx-font: 20 arial");
+        textArea.setOpacity(TEXT_AREA_OPACITY);
+        textArea.setStyle(TEXT_AREA_STYLE);
        textArea.setOnKeyPressed(new EventHandler<KeyEvent>() {
            @Override
            public void handle(KeyEvent keyEvent) {
@@ -108,37 +110,34 @@ public class ClientView extends Application {
         return textArea.getText();
    }
     private void makeButton() {
-        connection = new Button("CONNECT");
-        disConnection = new Button("DISCONNECT");
-        list = new Button("LIST");
+        connection = new Button(NAME_BUTTON_CONNECT);
+        disConnection = new Button(NAME_BUTTON_DISCONNECT);
+        list = new Button(NAME_BUTTON_LIST);
     }
     private void setButtonList(Button button) {
-        button.setTranslateX(690);
-        button.setTranslateY(500);
-        button.setPrefSize(100, 30);
-        button.setStyle("-fx-font: 12 arial; -fx-background-color:#339966;" +
-                "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 )");
+        button.setTranslateX(LIST_BUTTON_X);
+        button.setTranslateY(LIST_BUTTON_Y);
+        button.setPrefSize(LIST_BUTTON_HEIGHT, LIST_BUTTON_WEIGHT);
+        button.setStyle(STYLE_BACK_BUTTON + STYLE_FRONT_BUTTON);
     }
     private void setButtonConnect(Button button) {
-        button.setTranslateX(570);
-        button.setTranslateY(550);
-        button.setPrefSize(100, 30);
-        button.setStyle("-fx-font: 12 arial; -fx-background-color:#339966 ; " +
-                "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 )");
+        button.setTranslateX(CONNECT_X);
+        button.setTranslateY(BUTTON_Y);
+        button.setPrefSize(BUTTON_HEIGHT, BUTTON_WEIGHT);
+        button.setStyle(STYLE_BACK_BUTTON + STYLE_FRONT_BUTTON);
 
     }
 
     private void setButtonDisConnect(Button button) {
-        button.setTranslateX(690);
-        button.setTranslateY(550);
-        button.setPrefSize(100, 30);
-        button.setStyle("-fx-font: 12 arial; -fx-background-color:#339966;" +
-                "-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 )");
+        button.setTranslateX(DISCONNECT_X);
+        button.setTranslateY(BUTTON_Y);
+        button.setPrefSize(BUTTON_HEIGHT, BUTTON_WEIGHT);
+        button.setStyle(STYLE_BACK_BUTTON + STYLE_FRONT_BUTTON);
 
     }
     private void addLine() {
-        line = new Line(565, 0, 565, 600);
-        line.setStrokeWidth(5);
+        line = new Line(LINE_X, LINE_Y, LINE_X, LINE_Y2);
+        line.setStrokeWidth(LINE_WIDTH);
         line.setStroke(Color.DARKSEAGREEN);
     }
 
@@ -147,22 +146,22 @@ public class ClientView extends Application {
     }
     public static void setText(String str) {
         Date time = new Date();
-        SimpleDateFormat dt1 = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat dt1 = new SimpleDateFormat(DATA_FORMAT);
        String dtime = dt1.format(time); // время
         System.out.println(str);
-           chat.appendText(dtime + ": " + "New User: " + str + "\n");
+           chat.appendText(dtime + ": " + USER_NAME + str + "\n");
     }
     public static  void setList(ArrayList<String> str) {
         listOfClients.clear();
         for (String s : str) {
-             listOfClients.appendText("User: " + s + "\n");
+             listOfClients.appendText(USER_STRING + s + "\n");
         }
     }
     public static void showDeletedClient(String str) {
         Date time = new Date();
-        SimpleDateFormat dt1 = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat dt1 = new SimpleDateFormat(DATA_FORMAT);
         String dtime = dt1.format(time); // время
-        chat.appendText("User " + str + " " + "has left this chat\n" );
+        chat.appendText(USER_STRING + str + " " + USER_LEFT);
     }
 
 }
