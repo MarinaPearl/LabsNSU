@@ -7,7 +7,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.LinkedList;
-
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 class Story {
 
@@ -44,19 +47,21 @@ public class Server {
     public static final int PORT = 8080;
     public static LinkedList<ServerSomthing> serverList = new LinkedList<>();
     public static ArrayList<String> listofClients = new ArrayList<String>();
-    public static Story story;
-
+    public static lab5.demchuk.server.Story story;
+    private static final int NUMBER_OF_STREAMS = 10;
     public static void main(String[] args) throws IOException {
 
         ServerSocket server = new ServerSocket(PORT);
-        story = new Story();
-       // System.out.println("Server Started");
+        story = new lab5.demchuk.server.Story();
+        //System.out.println("Server Started");
+        ExecutorService executorService = Executors.newFixedThreadPool(NUMBER_OF_STREAMS);
         try {
             while (true) {
                 Socket socket = server.accept();
                 Connect connect = new Connect(socket);
                 try {
-                    serverList.add(new ServerSomthing(connect));
+
+                    serverList.add(executorService.execute(new ServerSomthing(connect)));
                 } catch (IOException e) {
                     socket.close();
                 }
