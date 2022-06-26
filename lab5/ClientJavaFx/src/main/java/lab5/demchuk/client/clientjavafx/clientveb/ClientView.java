@@ -1,5 +1,6 @@
 package lab5.demchuk.client.clientjavafx.clientveb;
 
+import javafx.animation.ScaleTransition;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -11,11 +12,19 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.*;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lab5.demchuk.client.clientjavafx.controller.ControllerClient;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,17 +32,22 @@ import java.util.Date;
 import static lab5.demchuk.client.clientjavafx.clientveb.ConstantsView.*;
 
 public class ClientView extends Application {
+    private Text text;
+    private ScaleTransition scaleTransition;
     private Pane group;
     private Scene scene;
     private Button connection;
     private Button disConnection;
     private Line line;
-    private static TextArea listOfClients;
-    private static TextArea textArea;
-    private static TextArea chat;
-    private static Button list;
+    private ControllerClient controller;
+    private  TextArea listOfClients;
+    private  TextArea textArea;
+    private  TextArea chat;
+    private  Button list;
     @Override
     public void start(Stage stage) {
+        controller = new ControllerClient();
+        controller.setView(this);
         setChat();
         group = new Pane();
         scene = new Scene(group, LENGTH, WIDTH);
@@ -46,20 +60,50 @@ public class ClientView extends Application {
         setButtonConnect(connection);
         setButtonDisConnect(disConnection);
         setButtonList(list);
-        group.getChildren().addAll(connection, disConnection, line, textArea, chat, listOfClients, list);
+        animation();
+        group.getChildren().addAll(connection, disConnection, line, chat, listOfClients, text);
         connection.setOnMouseClicked(event -> {
-           ControllerClient.doRegistration(str);
+            scaleTransition.stop();
+            group.getChildren().clear();
+            group.getChildren().addAll(connection, disConnection, line, chat, textArea, listOfClients);
+           controller.doRegistration(str, controller);
+
         });
         list.setOnMouseClicked(event -> {
-             ControllerClient.sendList();
+             controller.sendList();
         });
         disConnection.setOnMouseClicked(event -> {
-               ControllerClient.downClient();
+               controller.downClient();
+               //System.exit(0);
                stage.close();
         });
         stage.setScene(scene);
         stage.setTitle(NAME_CHAT);
         stage.show();
+
+    }
+    public void animation() {
+        text = new Text();
+        text.setText("WELCOME TO THE CLUB, BOY!");
+        text.setX(250.0f);
+        text.setY(170.0f);
+        text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 18));
+        Stop[] stops = new Stop[] {
+                new Stop(0, Color.GREENYELLOW),
+                new Stop(1, Color.SEAGREEN)
+        };
+        RadialGradient radialGradient =
+                new RadialGradient(0, 0, 300, 178, 60, false, CycleMethod.NO_CYCLE, stops);
+        text.setFill(radialGradient);
+
+        scaleTransition = new ScaleTransition();
+        scaleTransition.setDuration(Duration.millis(3000));
+        scaleTransition.setNode(text);
+        scaleTransition.setByY(1.5);
+        scaleTransition.setByX(1.5);
+        scaleTransition.setCycleCount(50);
+        scaleTransition.setAutoReverse(false);
+        scaleTransition.play();
 
     }
     private void setList() {
@@ -69,7 +113,6 @@ public class ClientView extends Application {
         listOfClients.setPrefHeight(LIST_HEIGHT);
         listOfClients.setPrefWidth(LIST_WIDTH);
         listOfClients.setWrapText(true);
-        listOfClients.setOpacity(OPACITY);
         listOfClients.setStyle(STYLE_TEXT);
         listOfClients.setEditable(false);
         listOfClients.setPromptText(LIST_PROMPT_TEXT);
@@ -81,7 +124,6 @@ public class ClientView extends Application {
         chat.setPrefHeight(CHAT_HEIGHT);
         chat.setPrefWidth(CHAT_WEIGHT);
         chat.setWrapText(true);
-        chat.setOpacity(OPACITY);
         chat.setStyle(STYLE_TEXT);
         chat.setEditable(false);
         chat.setPromptText(CHAT_PROMPT_TEXT);
@@ -90,23 +132,21 @@ public class ClientView extends Application {
         textArea = new TextArea();
         textArea.setTranslateX(TEXT_AREA_X);
         textArea.setTranslateY(TEXT_AREA_Y);
-        textArea.setPrefHeight(TEXT_AREA_HEIGHT);
         textArea.setPrefWidth(TEXT_AREA_WEIGHT);
         textArea.setPromptText(TEXT_AREA_PROMPT_TEXT);
         textArea.setWrapText(true);
-        textArea.setOpacity(TEXT_AREA_OPACITY);
         textArea.setStyle(TEXT_AREA_STYLE);
        textArea.setOnKeyPressed(new EventHandler<KeyEvent>() {
            @Override
            public void handle(KeyEvent keyEvent) {
                if (keyEvent.getCode() == KeyCode.ENTER)  {
-                   ControllerClient.setMessage(textArea.getText());
+                   controller.setMessage(textArea.getText());
                    textArea.clear();
                }
            }
        });
    }
-   public static String getTextArea() {
+   public  String getTextArea() {
         return textArea.getText();
    }
     private void makeButton() {
@@ -144,24 +184,32 @@ public class ClientView extends Application {
     public static void main(String[] args) {
         launch();
     }
-    public static void setText(String str) {
-        Date time = new Date();
-        SimpleDateFormat dt1 = new SimpleDateFormat(DATA_FORMAT);
-       String dtime = dt1.format(time); // время
-        System.out.println(str);
-           chat.appendText(dtime + ": " + USER_NAME + str + "\n");
+    public  void setText(String str, String time) {
+        try {
+            chat.appendText(time + ": " + USER_NAME + str + "\n");
+        } catch (NullPointerException error) {
+
+        }
     }
-    public static  void setList(ArrayList<String> str) {
+    public  void setMessage(String telegram, String name, String time) {
+        try {
+            chat.appendText(time + USER_STRING + name + ": " + telegram);
+        } catch (NullPointerException error) {
+
+        }
+    }
+    public   void setList(ArrayList<String> str) {
         listOfClients.clear();
         for (String s : str) {
              listOfClients.appendText(USER_STRING + s + "\n");
         }
     }
-    public static void showDeletedClient(String str) {
-        Date time = new Date();
-        SimpleDateFormat dt1 = new SimpleDateFormat(DATA_FORMAT);
-        String dtime = dt1.format(time); // время
-        chat.appendText(USER_STRING + str + " " + USER_LEFT);
+    public  void showDeletedClient(String str, String time) {
+        try {
+            chat.appendText(time + ": " + USER_STRING + str + " " + USER_LEFT);
+        } catch (NullPointerException error) {
+
+        }
     }
 
 }

@@ -1,6 +1,8 @@
 package lab5.demchuk.client.clientjavafx.model.Factory;
 
-public abstract class Reader implements TypeCommand {
+import java.io.Serializable;
+
+public abstract class Reader implements TypeCommand, Serializable {
        private String command;
        public void setCommand(String str) {
            this.command = str;

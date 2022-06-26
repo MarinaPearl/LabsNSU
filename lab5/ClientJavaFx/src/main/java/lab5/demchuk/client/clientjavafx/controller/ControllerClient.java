@@ -7,35 +7,64 @@ import lab5.demchuk.client.clientjavafx.model.ClientSomthing;
 import java.util.ArrayList;
 
 public class ControllerClient {
-    private static String string;
-    public static void doRegistration(String str) {
+    private ClientView view;
+    private ClientSomthing clientSomthing;
+    public void setClientSomthing(ClientSomthing clientSomthing) {
+        this.clientSomthing = clientSomthing;
+    }
+    public ClientSomthing getClientSomthing() {
+        return this.clientSomthing;
+    }
+    public void setView(ClientView value) {
+        this.view = value;
+    }
+
+    public void doRegistration(String str, ControllerClient controllerClient) {
         RegistrartionView view = new RegistrartionView();
-        view.registarted(str);
+        view.registarted(str, controllerClient);
     }
-    public static void setName(String str) {
-        ClientView.setText(str);
+
+    public  void setName(String str, String time) {
+        view.setText(str, time);
     }
-    public static void setMessage(String str) {
-        string = str;
-        ClientSomthing.sendMessage(str);
+
+    public  void setMessage(String str) {
+        //clientSomthing.sendMessage(str);
+        if (clientSomthing.getSerialization()) {
+            clientSomthing.sendMessage(str);
+        } else {
+            clientSomthing.sendObject(str);
+        }
         //String str = ClientView.getTextArea();
         //return str;
     }
-    public static  void setMessageOnView(String str) {
-           ClientView.setText(str);
+
+    public void setMessageOnView(String str, String name, String time) {
+        view.setMessage(str, name, time);
+        //ClientView.setText(str);
     }
-    public static void sendList() {
-           ClientSomthing.sendList();
+
+    public  void sendList() {
+        clientSomthing.sendList();
     }
-    public static void setList(ArrayList<String> str) {
-            ClientView.setList(str);
+
+    public  void setList(ArrayList<String> str) {
+        view.setList(str);
     }
-    public static void downClient() {
-        ClientSomthing.logout();
+
+    public  void downClient() {
+        //clientSomthing.logout();
+        if (clientSomthing.getSerialization() == true) {
+            clientSomthing.logout();
+        } else {
+            clientSomthing.logoutObject();
+        }
         //ClientSomthing.downService();
     }
-    public static void deleted(String str) {
-          ClientView.showDeletedClient(str);
+
+    public void deleted(String str, String time) {
+
+        view.showDeletedClient(str, time);
     }
 }
 

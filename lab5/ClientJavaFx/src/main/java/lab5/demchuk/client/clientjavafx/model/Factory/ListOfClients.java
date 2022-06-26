@@ -2,6 +2,7 @@ package lab5.demchuk.client.clientjavafx.model.Factory;
 
 import com.google.gson.Gson;
 import lab5.demchuk.client.clientjavafx.controller.ControllerClient;
+import lab5.demchuk.client.clientjavafx.model.ClientSomthing;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class ListOfClients extends Reader {
         return stringArrayList;
     }
     @Override
-    public void outInWindow() {
+    public void outInWindow(ControllerClient controllerClient) {
         Gson gson = new Gson();
        // Login login = new Login();
         ArrayList<String> str = new ArrayList<String>();
@@ -28,6 +29,6 @@ public class ListOfClients extends Reader {
             str.add(login.getNameUser());
         }
         //ControllerClient.setList(stringArrayList);
-        ControllerClient.setList(str);
+        controllerClient.setList(str);
     }
 }

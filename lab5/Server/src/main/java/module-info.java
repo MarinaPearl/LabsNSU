@@ -15,4 +15,5 @@ module lab5.demchuk.server {
     opens lab5.demchuk.server to javafx.fxml, com.google.gson;
     opens lab5.demchuk.server.Factory to com.google.gson;
     exports lab5.demchuk.server;
+    opens Demchuck.lab5.ru to com.google.gson;
 }

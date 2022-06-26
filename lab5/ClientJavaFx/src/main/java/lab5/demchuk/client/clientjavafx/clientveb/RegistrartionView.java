@@ -23,13 +23,15 @@ import lab5.demchuk.client.clientjavafx.controller.ControllerRegistration;
 import static lab5.demchuk.client.clientjavafx.clientveb.ConstantsView.*;
 
 public class RegistrartionView {
-    private static TextField textField;
+    private static TextArea textField;
+    private TextArea port;
+    private TextArea ipAdres;
     private Text text;
     private static String name;
     private Button go;
     private String str;
-
-    public void registarted(String str) {
+    private Button goObject;
+    public void registarted(String str, ControllerClient controllerClient) {
         this.str = str;
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -37,37 +39,64 @@ public class RegistrartionView {
         setTextField();
         setText();
         setButton();
+        setIpAdres();
+        setPort();
+        setButtonObject();
         ControllerRegistration conntroller = new ControllerRegistration();
         go.setOnMouseClicked(event -> {
             conntroller.closeWindow(stage);
-            conntroller.connectingInChat();
+            conntroller.connectingInChat(controllerClient,true, port.getText(), ipAdres.getText());
             //stage.close();
         });
+        goObject.setOnMouseClicked(event -> {
+            conntroller.closeWindow(stage);
+            conntroller.connectingInChat(controllerClient,false, port.getText(), ipAdres.getText());
+        });
         pane.setBackground(new Background(new BackgroundFill(Color.DARKSEAGREEN, null, null)));
-        pane.getChildren().addAll(textField, text, go);
+        pane.getChildren().addAll(textField, text, go, port, ipAdres, goObject);
         Scene scene = new Scene(pane, SCENE_X, SCENE_Y);
         stage.setScene(scene);
         stage.setTitle(this.str);
         stage.showAndWait();
     }
-
+    private void setButtonObject() {
+        goObject = new Button(NAME_BUTTON_GO);
+        goObject.setTranslateX(GO_X);
+        goObject.setTranslateY(GO_Y);
+        goObject.setPrefSize(BUTTON_HEIGHT_GO, BUTTON_WEIGHT);
+        goObject.setStyle(STYLE_BACK_BUTTON + STYLE_FRONT_BUTTON);
+    }
     private void setButton() {
-        go = new Button(NAME_BUTTON_GO);
+        go = new Button(NAME_BUTTON_GO_GSON);
         go.setTranslateX(GO_X);
-        go.setTranslateY(GO_Y);
-        go.setPrefSize(BUTTON_HEIGHT, BUTTON_WEIGHT);
+        go.setTranslateY(BUTTON_Y_TRANSLATE);
+        go.setPrefSize(BUTTON_HEIGHT_GO, BUTTON_WEIGHT);
         go.setStyle(STYLE_BACK_BUTTON + STYLE_FRONT_BUTTON);
     }
 
     private void setTextField() {
-        textField = new TextField();
+        textField = new TextArea();
         textField.setLayoutX(TEXT_FIELD_X);
         textField.setLayoutY(TEXT_FIELD_Y);
         textField.setPrefColumnCount(TEXT_FIELD_PREF);
         textField.setPrefHeight(TEXT_FIELD_HEIGHT);
-        textField.setOpacity(TEXT_FIELD_OPACITY);
     }
-
+    private void setPort() {
+        port = new TextArea();
+        port.setTranslateX(TEXT_FIELD_X);
+        port.setTranslateY(PORT);
+        port.setPrefColumnCount(TEXT_FIELD_PREF);
+        port.setPrefHeight(TEXT_FIELD_HEIGHT);
+        port.setPromptText(PORT_NAME);
+    }
+    private void setIpAdres() {
+        ipAdres = new TextArea();
+        ipAdres.setTranslateX(TEXT_FIELD_X);
+        ipAdres.setTranslateY(IP);
+        ipAdres.setPrefColumnCount(TEXT_FIELD_PREF);
+        ipAdres.setPrefHeight(TEXT_FIELD_HEIGHT);
+        ipAdres.setPromptText(IP_NAME);
+    }
     private void setText() {
         text = new Text(QUESTION);
         text.setX(TEXT_WINDOW_X);

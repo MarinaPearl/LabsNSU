@@ -17,4 +17,5 @@ module lab5.demchuk.client.clientjavafx {
     exports lab5.demchuk.client.clientjavafx.clientveb;
     opens lab5.demchuk.client.clientjavafx.model to com.google.gson;
     opens lab5.demchuk.client.clientjavafx.model.Factory to com.google.gson;
+    opens Demchuck.lab5.ru to com.google.gson;
 }

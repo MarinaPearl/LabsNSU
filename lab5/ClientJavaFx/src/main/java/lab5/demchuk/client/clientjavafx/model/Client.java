@@ -18,16 +18,16 @@ import static lab5.demchuk.client.clientjavafx.model.Factory.Constannts.CHAT_CLI
 
 public class Client {
 
-    public static String ipAddr = "localhost";
-    public static int port = 8080;
+    //public static String ipAddr = "192.168.56.1";
+    //public static int port = 8080;
 
 
-    public static void newClient() {
+    public  void newClient(ControllerClient controllerClient, boolean serialization, String port, String ip) {
 
         try {
-            Socket socket = new Socket(ipAddr, port);
+            Socket socket = new Socket(ip, Integer.parseInt(port));
             Connect connect = new Connect(socket);
-            new ClientSomthing(connect);
+            new ClientSomthing(connect, controllerClient, serialization);
         } catch (Exception error) {
             error.printStackTrace();
         }

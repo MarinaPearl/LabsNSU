@@ -17,8 +17,9 @@ public class ControllerRegistration {
            stage.close();
        }
     }
-    public void connectingInChat() {
-        Client.newClient();
+    public void connectingInChat(ControllerClient controllerClient, boolean serialization, String port, String ip) {
+        Client client = new Client();
+        client.newClient(controllerClient, serialization, port, ip);
     }
     public static String getName() {
         return name;

@@ -54,6 +54,7 @@ public class Connect {
         if (str != null) {
             return str;
         } else {
+            //return null;
             throw new RuntimeException(error);
         }
     }
